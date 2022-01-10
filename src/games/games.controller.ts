@@ -10,13 +10,14 @@ import {
 import { GamesService } from './games.service';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
+import { Game } from '@prisma/client';
 
 @Controller('games')
 export class GamesController {
   constructor(private gamesService: GamesService) {}
 
   @Post()
-  create(@Body() createGameDto: CreateGameDto) {
+  create(@Body() createGameDto: CreateGameDto): Promise<Game> {
     return this.gamesService.create(createGameDto);
   }
 

@@ -1,4 +1,4 @@
-import { IsString, IsEmail, IsNotEmpty, Length } from 'class-validator';
+import { IsString, IsNotEmpty } from 'class-validator';
 
 export class CreateGameDto {
   @IsString()
@@ -16,4 +16,12 @@ export class CreateGameDto {
   @IsNotEmpty({ message: 'Preencha o campo produtora' })
   @IsString()
   studio: string;
+
+  @IsNotEmpty({ message: 'Preencha o campo Valor' })
+  @IsString()
+  price: string;
+
+  @IsNotEmpty({ message: 'Preencha o requisitos' })
+  @IsString()
+  requirement: string;
 }

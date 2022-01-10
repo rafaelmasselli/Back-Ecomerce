@@ -22,12 +22,14 @@ model User {
 }
 
 model Game {
-  id      String   @id @default(uuid())
-  name    String   @unique
-  date    String
-  image   String
-  studio  String
-  created DateTime @default(now())
-  updated DateTime @updatedAt
-  Usuario User[]
+  id          String   @id @default(uuid())
+  name        String   @unique
+  date        String
+  image       String
+  studio      String
+  price       String
+  requirement String
+  created     DateTime @default(now())
+  updated     DateTime @updatedAt
+  Usuario     User[]
 }

@@ -4,9 +4,7 @@ import { UpdateGameDto } from './dto/update-game.dto';
 
 @Injectable()
 export class GamesService {
-  create(createGameDto: CreateGameDto) {
-    return 'This action adds a new game';
-  }
+  create(createGameDto: CreateGameDto): Promise<Game> {}
 
   findAll() {
     return `This action returns all games`;

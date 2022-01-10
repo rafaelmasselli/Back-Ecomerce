@@ -44,12 +44,12 @@ export class UsersService {
   findOne(id: string): Promise<User> {
     const usuario = this.database.user.findUnique({
       where: { id },
-    if(!usuario) {
-      throw new NotFoundException('Usuario nao encontrado')
-    }
     });
-   return usuario
+    if (!usuario) {
+      throw new NotFoundException('Usuario nao encontrado');
+    }
 
+    return usuario;
   }
 
   update(id: string, updateUserDto: UpdateUserDto) {
