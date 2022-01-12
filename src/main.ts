@@ -12,6 +12,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Steam')
     .setVersion('1.0')
+    .addTag('Ecomerce')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
