@@ -1,17 +1,44 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  UnauthorizedException,
+  NotFoundException,
+} from '@nestjs/common';
+import { PrismaService } from 'src/prisma.service';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
-
+import { Game } from '@prisma/client';
 @Injectable()
 export class GamesService {
-  create(createGameDto: CreateGameDto): Promise<Game> {}
-
-  findAll() {
-    return `This action returns all games`;
+  constructor(private database: PrismaService) {}
+  async create(data: CreateGameDto): Promise<Game> {
+    const NameExistent = await this.database.game.findUnique({
+      where: { name: data.name },
+    });
+    if (NameExistent) {
+      throw new UnauthorizedException('Jogo ja existente');
+    } else {
+      const game = await this.database.game.create({
+        data,
+      });
+      return game;
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} game`;
+  async findAll(): Promise<Game[]> {
+    const Games = await this.database.game.findMany();
+    return Games;
+  }
+
+  async findOne(id: string): Promise<Game> {
+    const GAME = await this.database.game.findUnique({
+      where: { id },
+    });
+
+    if (!GAME) {
+      throw new NotFoundException('Erro Jogo nao encontrado');
+    }
+
+    return GAME;
   }
 
   update(id: number, updateGameDto: UpdateGameDto) {

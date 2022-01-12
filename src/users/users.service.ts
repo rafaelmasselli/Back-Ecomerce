@@ -52,8 +52,21 @@ export class UsersService {
     return usuario;
   }
 
-  update(id: string, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string, dado: UpdateUserDto) {
+    const EmailExiste = this.database.user.findUnique({
+      where: { email: dado.email },
+    });
+
+    if (!EmailExiste) {
+      throw new NotFoundException('Email nao encontrado');
+    }
+    const updateUser = await this.database.user.update({
+      data: dado,
+      where: { id: id },
+    });
+
+    delete updateUser.password;
+    return updateUser;
   }
 
   remove(id: string) {

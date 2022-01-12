@@ -1,27 +1,34 @@
 import { IsString, IsNotEmpty } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateGameDto {
   @IsString()
-  @IsNotEmpty({ message: 'Preencha o campo nome' })
+  @ApiProperty()
+  @IsNotEmpty({ message: ' Preencha o campo nome' })
   name: string;
 
-  @IsNotEmpty({ message: 'Preencha o campo data' })
+  @IsNotEmpty({ message: ' Preencha o campo data' })
+  @ApiProperty()
   @IsString()
-  data: string;
+  date: string;
 
-  @IsNotEmpty({ message: 'Preencha o image com uma url do jogo' })
+  @IsNotEmpty({ message: ' Preencha o image com uma url do jogo' })
+  @ApiProperty()
   @IsString()
   image: string;
 
-  @IsNotEmpty({ message: 'Preencha o campo produtora' })
+  @IsNotEmpty({ message: ' Preencha o campo produtora' })
   @IsString()
+  @ApiProperty()
   studio: string;
 
-  @IsNotEmpty({ message: 'Preencha o campo Valor' })
+  @IsNotEmpty({ message: ' Preencha o campo Valor' })
+  @ApiProperty()
   @IsString()
   price: string;
 
-  @IsNotEmpty({ message: 'Preencha o requisitos' })
+  @IsNotEmpty({ message: ' Preencha o requisitos' })
+  @ApiProperty()
   @IsString()
   requirement: string;
 }

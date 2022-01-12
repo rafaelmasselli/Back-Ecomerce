@@ -6,11 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { GamesService } from './games.service';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
 import { Game } from '@prisma/client';
+import { AuthGuard } from '@nestjs/passport';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @Controller('games')
 export class GamesController {
@@ -22,13 +25,13 @@ export class GamesController {
   }
 
   @Get()
-  findAll() {
+  findAll(): Promise<Game[]> {
     return this.gamesService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.gamesService.findOne(+id);
+  findOne(@Param('id') id: string): Promise<Game> {
+    return this.gamesService.findOne(id);
   }
 
   @Patch(':id')
