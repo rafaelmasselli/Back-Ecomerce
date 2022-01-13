@@ -10,10 +10,10 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from '@prisma/client';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import { AuthUser } from './../auth/auth-user.decoretor';
 @ApiTags('user')
 @Controller('users')
 export class UsersController {
@@ -34,14 +34,7 @@ export class UsersController {
   findOne(@Param('id') id: string): Promise<User> {
     return this.usersService.findOne(id);
   }
-  @ApiBearerAuth()
-  @ApiOperation({
-    summary: 'Editar um perfil',
-  })
-  @Patch('/:id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(id, updateUserDto);
-  }
+
   @ApiBearerAuth()
   @ApiOperation({
     summary: 'Deletar um perfil',
@@ -49,5 +42,22 @@ export class UsersController {
   @Delete('/:id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
+  }
+  @UseGuards(AuthGuard())
+  @Patch('/:id')
+  @ApiOperation({
+    summary: 'Adicionar um jogo na lista de um usuário, ou remover',
+  })
+  @ApiBearerAuth()
+  addList(@AuthUser() user: User, @Param('id') gameId: string) {
+    return this.usersService.addList(user, gameId);
+  }
+  @UseGuards(AuthGuard())
+  @Get()
+  @ApiOperation({
+    summary: 'Ver os intens do carrinho do usuario',
+  })
+  userList(@AuthUser() user: User) {
+    return this.usersService.userList(user.id);
   }
 }
