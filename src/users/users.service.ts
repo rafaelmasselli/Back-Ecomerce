@@ -8,7 +8,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/prisma.service';
 import { User, Game } from '@prisma/client';
-
+import { UpdateUserDto } from './dto/Update-User-Dto';
 @Injectable()
 export class UsersService {
   constructor(private database: PrismaService) {}
@@ -40,8 +40,8 @@ export class UsersService {
     return usuario;
   }
 
-  findOne(id: string): Promise<User> {
-    const usuario = this.database.user.findUnique({
+  async findOne(id: string): Promise<User> {
+    const usuario = await this.database.user.findUnique({
       where: { id },
     });
     if (!usuario) {
@@ -51,8 +51,18 @@ export class UsersService {
     return usuario;
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} user`;
+  async remove(id: string): Promise<{ message: string }> {
+    const user = await this.database.user.findUnique({
+      where: { id },
+    });
+    if (!user) {
+      throw new NotFoundException('Usuario nao existe');
+    } else {
+      await this.database.user.delete({
+        where: { id },
+      });
+    }
+    return { message: 'usuario deletador com sucesso' };
   }
 
   async addList(user: User, gameId: string) {
@@ -112,5 +122,12 @@ export class UsersService {
       },
     });
     return games;
+  }
+  async update(id: string, UpdateUserDto: UpdateUserDto): Promise<User> {
+    const Usuario = await this.database.user.update({
+      data: UpdateUserDto,
+      where: { id },
+    });
+    return Usuario;
   }
 }

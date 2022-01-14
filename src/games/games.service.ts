@@ -41,11 +41,26 @@ export class GamesService {
     return GAME;
   }
 
-  update(id: number, updateGameDto: UpdateGameDto) {
-    return `This action updates a #${id} game`;
+  async update(id: string, dado: UpdateGameDto) {
+    const games = await this.database.game.update({
+      data: dado,
+      where: { id },
+    });
+    return games;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} game`;
+  async remove(id: string): Promise<{ message: string }> {
+    const game = await this.database.game.findUnique({
+      where: { id },
+    });
+
+    if (!game) {
+      throw new NotFoundException('Jogo nao encontrado');
+    } else {
+      await this.database.game.delete({
+        where: { id },
+      });
+    }
+    return { message: 'jogo deletado com sucessso' };
   }
 }

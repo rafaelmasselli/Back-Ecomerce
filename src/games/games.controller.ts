@@ -49,7 +49,7 @@ export class GamesController {
     summary: 'Editar um jogo',
   })
   update(@Param('id') id: string, @Body() updateGameDto: UpdateGameDto) {
-    return this.gamesService.update(+id, updateGameDto);
+    return this.gamesService.update(id, updateGameDto);
   }
 
   @UseGuards(AuthGuard())
@@ -58,6 +58,6 @@ export class GamesController {
     summary: 'Deletar um jogo',
   })
   remove(@Param('id') id: string) {
-    return this.gamesService.remove(+id);
+    return this.gamesService.remove(id);
   }
 }

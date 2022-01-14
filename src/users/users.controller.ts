@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/Update-User-Dto';
 import { User } from '@prisma/client';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
@@ -59,5 +60,17 @@ export class UsersController {
   })
   userList(@AuthUser() user: User) {
     return this.usersService.userList(user.id);
+  }
+  @UseGuards(AuthGuard())
+  @Patch('update/:id')
+  @ApiOperation({
+    summary: 'Editar o usuario',
+  })
+  @ApiBearerAuth()
+  update(
+    @Param('id') id: string,
+    @Body() updateFilmeDto: UpdateUserDto,
+  ): Promise<User> {
+    return this.usersService.update(id, updateFilmeDto);
   }
 }
