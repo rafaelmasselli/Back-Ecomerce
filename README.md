@@ -1,4 +1,4 @@
-<h1 align="center">🎮 Ecommerce Steam 🎮</h1>
+<h1 align="center">🎮 E-commerce Steam 🎮</h1>
 
 <div align="center">
 
