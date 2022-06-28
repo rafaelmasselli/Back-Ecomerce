@@ -1,77 +1,98 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+<h1 align="center">🎮 Ecommerce Steam 🎮</h1>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<div align="center">
 
+![Logo steam](/.github/steam.png)
 
-<h1 align="center"> E commerce Backend project </h1>
+</div>
 
+## 📝 Descrição
 
-## Description
-E commerce project made in nest TypeScript, project with routes authenticated with jwt prioritizing the security of the user with bcrypt
+### Projeto clonando o ecommerce da <strong>Steam</strong>
 
+## 🤖 Requisitos
 
-## Dependencies 
-
-- Jwt
-- Bcrypt
-- Passport
-- Prisma/Clint
-- Class validador
-- Swagger 
+- [Docker](https://docs.docker.com)
+- [Node js](https://nodejs.org/en/)
+- [Nest](https://nestjs.com)
+- [React](https://pt-br.reactjs.org)
+- [IDE](https://blog.geekhunter.com.br/ide-javascript/)
 
 
-## Installation
+## 🧪 Tecnologias
+
+### Esse projeto foi desenvolvido com as seguintes tecnologias
+
+### Front-end
+
+- [React](https://reactjs.org)
+- [styled-components](https://styled-components.com)
+- [axios](https://www.npmjs.com/package/axios)
+
+### Back-end
+
+- [Nest Ts](https://nestjs.com)
+- [Bcrypt](https://www.npmjs.com/package/bcrypt)
+- [Jwt](https://jwt.io/introduction)
+- [Prisma](https://www.prisma.io/docs/)
+
+
+## 🚀 Como executar
+
+### Clone o projeto e acesse a pasta do mesmo
 
 ```bash
+$ git clone https://github.com/rafaelmasselli/Ecommerce-steam
+cd CloneNetflix
+```
+
+## Para inciar o projeto voce precisa estar rodando o Back-end primeiro
+
+## Iniciando o Back-end
+
+```bash
+# Entre na pasta do back-end
+$ cd server
+# Instale as dependências
 $ npm install
 ```
 
-## Prerequisites
+### Conectando o banco
 
-To start the project you need to have installed <a href="https://nodejs.org/en/download/">Node Js</a>
+### Crie um arquivo chamando .env
 
-## Running the app
+![Criando um arquivo .env](/.github/env.png)
+
+### Agora copie e cole o exemplo do arquivo .env.exemple e cole no .env
+
+### Agora inicie o docker e o prisma
 
 ```bash
-# development
-$ npm run start
+# Iniciando o banco em docker
+$ docker compose up
+# Criando o schema no banco
+$ npx prisma migrate dev
+```
 
-# watch mode
+### E assim ira rodar o banco do docker
+
+![Imagem do docker rodando](/.github/dockerRodando.png)
+
+### Agora inicie o projeto
+
+```bash
 $ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
-<p>The project will boot to port : <a href="http://localhost:3001">http://localhost:3001</a></p>
-  
-<p>The swagger will be initialized on port : <a href="http://localhost:3001/swagger">http://localhost:3001/swagger</a></p>
 
-## Test
+![terminal do back-end](/.github/BackEndRodando.png)
+
+## Iniciando o Front-end
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+# Entre na pasta do front-end
+$ cd web
+# Instale as dependências
+$ npm install
+# Agora incie o projeto
+$ npm start
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).

@@ -1,17 +1,17 @@
 version: '3'
 
 services:
- netflixpg:
+ steam:
   image: postgres:alpine
   ports:
   - '5432:5432'
-  container_name: 'Steam'
+  container_name: 'steamecommerce'
   restart: always
   volumes:
-   - Steam-data:/var/lib/postgresql/data
+   - netflixpg-data:/var/lib/postgresql/data
   environment:
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: jklv1234
 
 volumes:
- Steam:
+ netflixpg-data:
